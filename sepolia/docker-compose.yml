@@ -1,0 +1,47 @@
+version: "3.8"
+
+services:
+  erigon:
+    image: thorax/erigon:v2.57.0
+    container_name: erigon-sepolia
+    command: |
+      --chain=sepolia --prune=htc
+      --authrpc.addr="erigon" --authrpc.jwtsecret=/jwt.hex --authrpc.vhosts="erigon"
+      --http.api="eth,debug,net,engine,web3" --http.addr="0.0.0.0" --http.corsdomain="*" --http.vhosts='*'
+    ports:
+      - "8545:8545"
+      - "8551:8551"
+      - "1111:30303"
+    volumes:
+      - erigon-sepolia:/home/erigon/.local/share/erigon
+    restart: unless-stopped
+    mem_swappiness: 0
+    configs:
+      - jwt.hex
+  prysm:
+    image: gcr.io/prysmaticlabs/prysm/beacon-chain:v4.2.0
+    container_name: prysm-sepolia
+    command: |
+      --sepolia --accept-terms-of-use --genesis-state=/genesis.ssz
+      --execution-endpoint=http://erigon:8551 --jwt-secret=/jwt.hex
+      --suggested-fee-recipient="0x9DA155Af6926eBbb72Bce91fD84efE8fC867274c"
+      --checkpoint-sync-url=https://checkpoint-sync.sepolia.ethpandaops.io --genesis-beacon-api-url=https://checkpoint-sync.sepolia.ethpandaops.io
+    volumes:
+      - prysm-sepolia:/root/.eth2
+    depends_on:
+      - "erigon"
+    restart: unless-stopped
+    mem_swappiness: 0
+    configs:
+      - genesis.ssz
+      - jwt.hex
+
+configs:
+  genesis.ssz:
+    file: ./genesis.ssz
+  jwt.hex:
+    file: ./jwt.hex
+
+volumes:
+  erigon-sepolia:
+  prysm-sepolia:
