@@ -1,7 +1,7 @@
 # node-launch
 
 ```
-git clone git@github.com:Snapchain/node-launch.git
+git clone https://github.com/Snapchain/node-launch.git
 cd node-launch
 ```
 
@@ -9,8 +9,20 @@ cd node-launch
 
 Launch [Erigon](https://github.com/ledgerwatch/erigon) and [Prysm](https://github.com/prysmaticlabs/prysm) to provide L1 RPC of Testnet [Sepolia](https://sepolia.etherscan.io/).
 
+### Generate JWT token
+
+The HTTP connection between the beacon node and execution node needs to be authenticated using a JWT token. Refer to the Prysm [authentication](https://docs.prylabs.network/docs/execution-node/authentication) for more details.
+
+Use OpenSSL to create the token via command:
+
 ```
 cd sepolia
+openssl rand -hex 32 | tr -d "\n" > "jwt.hex"
+```
+
+Launch L1 node:
+
+```
 docker compose up -d
 ```
 

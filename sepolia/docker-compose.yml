@@ -11,11 +11,10 @@ services:
     ports:
       - "8545:8545"
       - "8551:8551"
-      - "1111:30303"
+      - "30303:30303"
     volumes:
       - erigon-sepolia:/home/erigon/.local/share/erigon
     restart: unless-stopped
-    mem_swappiness: 0
     configs:
       - jwt.hex
   prysm:
@@ -24,14 +23,12 @@ services:
     command: |
       --sepolia --accept-terms-of-use --genesis-state=/genesis.ssz
       --execution-endpoint=http://erigon:8551 --jwt-secret=/jwt.hex
-      --suggested-fee-recipient="0x9DA155Af6926eBbb72Bce91fD84efE8fC867274c"
       --checkpoint-sync-url=https://checkpoint-sync.sepolia.ethpandaops.io --genesis-beacon-api-url=https://checkpoint-sync.sepolia.ethpandaops.io
     volumes:
       - prysm-sepolia:/root/.eth2
     depends_on:
       - "erigon"
     restart: unless-stopped
-    mem_swappiness: 0
     configs:
       - genesis.ssz
       - jwt.hex
