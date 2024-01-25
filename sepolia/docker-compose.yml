@@ -13,6 +13,7 @@ services:
       - "8551:8551"
       - "30303:30303"
     volumes:
+      - ${ERIGON_DATA_DIR}:/home/erigon/.local/share/erigon
       - erigon-sepolia:/home/erigon/.local/share/erigon
     restart: unless-stopped
     configs:
@@ -25,7 +26,7 @@ services:
       --execution-endpoint=http://erigon:8551 --jwt-secret=/jwt.hex
       --checkpoint-sync-url=https://checkpoint-sync.sepolia.ethpandaops.io --genesis-beacon-api-url=https://checkpoint-sync.sepolia.ethpandaops.io
     volumes:
-      - prysm-sepolia:/root/.eth2
+      - ${PRYSM_DATA_DIR}:/root/.eth2
     depends_on:
       - "erigon"
     restart: unless-stopped
@@ -38,7 +39,3 @@ configs:
     file: ./genesis.ssz
   jwt.hex:
     file: ./jwt.hex
-
-volumes:
-  erigon-sepolia:
-  prysm-sepolia:
