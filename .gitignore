@@ -1,4 +1,6 @@
+# Local secrets and configs
 .env
+jwt.hex
 
 # Local .terraform directories
 **/.terraform/*

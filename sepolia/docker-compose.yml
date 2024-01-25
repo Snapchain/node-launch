@@ -14,7 +14,6 @@ services:
       - "30303:30303"
     volumes:
       - ${ERIGON_DATA_DIR}:/home/erigon/.local/share/erigon
-      - erigon-sepolia:/home/erigon/.local/share/erigon
     restart: unless-stopped
     configs:
       - jwt.hex
