@@ -24,7 +24,7 @@ openssl rand -hex 32 | tr -d "\n" > "jwt.hex"
 
 Run the following command to avoid permission issue like [this](https://github.com/ledgerwatch/erigon/issues/3950)
 ```
-sudo chown 1000:1000 <PRYSM_DATA_DIR>
+sudo chown 1000:1000 <ERIGON_DATA_DIR>
 ```
 
 ## Launch L1 node
