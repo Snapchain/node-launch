@@ -1,8 +1,10 @@
 version: "3.8"
 
 services:
+
   erigon:
     image: thorax/erigon:v2.57.0
+    user: "1000:1000"
     container_name: erigon-sepolia
     command: |
       --chain=sepolia --prune=htc
@@ -17,6 +19,7 @@ services:
     restart: unless-stopped
     configs:
       - jwt.hex
+
   prysm:
     image: gcr.io/prysmaticlabs/prysm/beacon-chain:v4.2.0
     container_name: prysm-sepolia
