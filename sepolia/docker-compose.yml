@@ -3,7 +3,7 @@ version: "3.8"
 services:
 
   erigon:
-    image: thorax/erigon:v2.57.0
+    image: thorax/erigon:v2.58.1
     user: "1000:1000"
     container_name: erigon-sepolia
     command: |
@@ -21,7 +21,7 @@ services:
       - jwt.hex
 
   prysm:
-    image: gcr.io/prysmaticlabs/prysm/beacon-chain:v4.2.0
+    image: gcr.io/prysmaticlabs/prysm/beacon-chain:v5.0.1
     container_name: prysm-sepolia
     command: |
       --sepolia --accept-terms-of-use --genesis-state=/genesis.ssz
