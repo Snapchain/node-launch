@@ -10,8 +10,10 @@ services:
       --chain=sepolia --prune=htc
       --authrpc.addr="erigon" --authrpc.jwtsecret=/jwt.hex --authrpc.vhosts="erigon"
       --http.api="eth,debug,net,engine,web3" --http.addr="0.0.0.0" --http.corsdomain="*" --http.vhosts='*'
+      --ws
     ports:
       - "8545:8545"
+      - "8546:8546"
       - "8551:8551"
       - "30303:30303"
     volumes:
