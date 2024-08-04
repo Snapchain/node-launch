@@ -53,4 +53,9 @@ curl -H "Content-Type: application/json" -X POST --data '{"jsonrpc":"2.0","metho
 curl -H "Content-Type: application/json" -X POST --data '{"jsonrpc":"2.0","method":"eth_getBlockByNumber","params":["0x0", false],"id":1}' http://127.0.0.1:8545
 ```
 
+To test the Beacon API:
+```
+curl -H "Content-Type: application/json" http://127.0.0.1:3500/eth/v1alpha1/beacon/chainhead
+```
+
 To convert hex number in the result to decimal, we can do `printf "%d\n" 0x<xxx>`
