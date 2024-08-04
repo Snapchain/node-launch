@@ -28,7 +28,10 @@ services:
     command: |
       --sepolia --accept-terms-of-use --genesis-state=/genesis.ssz
       --execution-endpoint=http://erigon:8551 --jwt-secret=/jwt.hex
+      --grpc-gateway-host="0.0.0.0" --grpc-gateway-corsdomain="*"
       --checkpoint-sync-url=https://checkpoint-sync.sepolia.ethpandaops.io --genesis-beacon-api-url=https://checkpoint-sync.sepolia.ethpandaops.io
+    ports:
+      - "3500:3500"
     volumes:
       - ${PRYSM_DATA_DIR}:/root/.eth2
     depends_on:
