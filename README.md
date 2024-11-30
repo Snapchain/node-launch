@@ -2,8 +2,13 @@
 
 ```
 git clone https://github.com/Snapchain/node-launch.git
-cd node-launch
+cd node-launch/sepolia
+cp .env.example .env
 ```
+
+then set `ERIGON_DATA_DIR` and `PRYSM_DATA_DIR` to the locations inside the mounted volume
+
+run `sudo mkdir -p` to create those directories
 
 ## Overview
 
@@ -16,7 +21,6 @@ The HTTP connection between the beacon node and execution node needs to be authe
 Use OpenSSL to create the token via command:
 
 ```
-cd sepolia
 openssl rand -hex 32 | tr -d "\n" > "jwt.hex"
 ```
 
