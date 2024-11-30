@@ -30,9 +30,12 @@ openssl rand -hex 32 | tr -d "\n" > "jwt.hex"
 
 ## Set up permission
 
-Run the following command to avoid permission issue like [this](https://github.com/ledgerwatch/erigon/issues/3950)
+Run the following command to avoid permission issues like
+- https://github.com/ledgerwatch/erigon/issues/3950
+- https://github.com/erigontech/erigon/issues/12931
+
 ```
-sudo chown 1000:1000 <ERIGON_DATA_DIR>
+sudo chown 100:1000 <ERIGON_DATA_DIR>
 ```
 
 ## Launch L1 node
