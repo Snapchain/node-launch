@@ -14,6 +14,10 @@ run `sudo mkdir -p` to create those directories
 
 Launch [Erigon](https://github.com/ledgerwatch/erigon) and [Prysm](https://github.com/prysmaticlabs/prysm) to provide L1 RPC of Testnet [Sepolia](https://sepolia.etherscan.io/).
 
+## System requirements
+
+The Sepolia node has been tested on: 8 GB Memory / 2 Intel vCPUs / 160 GB Disk + 1000 GB / SGP1 - Debian 12 x64 (DigitalOcean)
+
 ## Generate JWT token
 
 The HTTP connection between the beacon node and execution node needs to be authenticated using a JWT token. Refer to the Prysm [authentication](https://docs.prylabs.network/docs/execution-node/authentication) for more details.
