@@ -2,7 +2,7 @@ services:
 
   erigon:
     image: erigontech/erigon:v2.60.10
-    user: "1000:1000"
+    user: "100:1000"
     container_name: erigon-sepolia
     command: |
       --chain=sepolia --prune=hrtc
