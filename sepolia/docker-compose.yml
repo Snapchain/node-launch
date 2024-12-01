@@ -21,6 +21,19 @@ services:
     configs:
       - jwt.hex
 
+  # TODO:
+  # - add the diagnostics container
+  # - replace hardcoded IP address and session pin
+  erigon-support:
+    image: erigontech/erigon:v2.60.10
+    container_name: erigon-support-sepolia
+    command: |
+      support --debug.addrs localhost:6060 
+      --diagnostics.addr 152.42.185.70:8080 
+      --diagnostics.sessions 91128582
+      --insecure
+    restart: unless-stopped
+
   prysm:
     image: gcr.io/prysmaticlabs/prysm/beacon-chain:v5.1.2
     container_name: prysm-sepolia
