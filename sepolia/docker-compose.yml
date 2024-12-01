@@ -15,23 +15,30 @@ services:
       - "8546:8546"
       - "8551:8551"
       - "30303:30303"
+      - "6060:6060"
     volumes:
       - ${ERIGON_DATA_DIR}:/home/erigon/.local/share/erigon
     restart: unless-stopped
     configs:
       - jwt.hex
 
-  # TODO:
-  # - add the diagnostics container
-  # - replace hardcoded IP address and session pin
   erigon-support:
     image: erigontech/erigon:v2.60.10
     container_name: erigon-support-sepolia
     command: |
-      support --debug.addrs localhost:6060 
-      --diagnostics.addr 152.42.185.70:8080 
-      --diagnostics.sessions 91128582
+      support --debug.addrs erigon:6060 
+      --diagnostics.addr erigon-diagnostics:8080 
+      --diagnostics.sessions ${DIAGNOSTICS_SESSION}
       --insecure
+    restart: unless-stopped
+
+  erigon-diagnostics:
+    image: diagnostics
+    container_name: erigon-diagnostics-sepolia
+    command: |
+      /diagnostics --addr 0.0.0.0:8080
+    ports:
+      - "8080:8080"
     restart: unless-stopped
 
   prysm:
