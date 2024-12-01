@@ -1,11 +1,12 @@
 services:
 
   erigon:
-    image: thorax/erigon:2.60.8
-    user: "1000:1000"
+    image: erigontech/erigon:v2.60.10
+    user: "100:1000"
     container_name: erigon-sepolia
     command: |
-      --chain=sepolia --prune=htc
+      --chain=sepolia --prune=hrtc
+      --torrent.download.rate=512mb
       --authrpc.addr="erigon" --authrpc.jwtsecret=/jwt.hex --authrpc.vhosts="erigon"
       --http.api="eth,debug,net,engine,web3" --http.addr="0.0.0.0" --http.corsdomain="*" --http.vhosts='*'
       --ws
