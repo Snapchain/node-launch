@@ -30,6 +30,9 @@ services:
       --diagnostics.addr erigon-diagnostics:8080 
       --diagnostics.sessions ${DIAGNOSTICS_SESSION}
       --insecure
+    depends_on:
+      - "erigon"
+      - "erigon-diagnostics"
     restart: unless-stopped
 
   erigon-diagnostics:
