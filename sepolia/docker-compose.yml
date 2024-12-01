@@ -15,11 +15,34 @@ services:
       - "8546:8546"
       - "8551:8551"
       - "30303:30303"
+      - "6060:6060"
     volumes:
       - ${ERIGON_DATA_DIR}:/home/erigon/.local/share/erigon
     restart: unless-stopped
     configs:
       - jwt.hex
+
+  erigon-support:
+    image: erigontech/erigon:v2.60.10
+    container_name: erigon-support-sepolia
+    command: |
+      support --debug.addrs erigon:6060 
+      --diagnostics.addr erigon-diagnostics:8080 
+      --diagnostics.sessions ${DIAGNOSTICS_SESSION}
+      --insecure
+    depends_on:
+      - "erigon"
+      - "erigon-diagnostics"
+    restart: unless-stopped
+
+  erigon-diagnostics:
+    image: diagnostics
+    container_name: erigon-diagnostics-sepolia
+    command: |
+      /diagnostics --addr="0.0.0.0"
+    ports:
+      - "8080:8080"
+    restart: unless-stopped
 
   prysm:
     image: gcr.io/prysmaticlabs/prysm/beacon-chain:v5.1.2
