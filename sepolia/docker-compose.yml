@@ -39,7 +39,7 @@ services:
     image: diagnostics
     container_name: erigon-diagnostics-sepolia
     command: |
-      /diagnostics --addr 0.0.0.0:8080
+      /diagnostics --addr="0.0.0.0"
     ports:
       - "8080:8080"
     restart: unless-stopped
